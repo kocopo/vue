@@ -3,13 +3,26 @@ const app = Vue.createApp({
     return {
       counter: 40,
       name: '',
-      confirmedName: ''
+      lastName: ''
     };
   },
+  watch:{
+    counter(value){
+      if(this.counter === 50){
+        this.counter = 0;
+      }
+    }
+  },
+  computed:{
+    fullname(){
+      if(this.name === '' || this.lastName == ''){
+        return '';
+      }
+      return this.name + ' ' + this.lastName;
+    }
+  },
   methods:{
-    confirmInput(){
-      this.confirmedName = this.name;
-    },
+
     setName(event, lastName){
       this.name = event.target.value;
     },
@@ -21,6 +34,7 @@ const app = Vue.createApp({
     },
     resetInput(){
       this.name = '';
+      this.lastName = '';
     }
   }
 });
