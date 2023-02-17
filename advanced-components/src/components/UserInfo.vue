@@ -1,22 +1,24 @@
 <template>
   <section>
-    <div>
+    <header>
       <h3>{{ fullName }}</h3>
       <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
-    </div>
+    </header>
     <p>{{ infoText }}</p>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import BaseBadge from './BaseBadge.vue';
 
 export default defineComponent({
+    components:{BaseBadge},
     props: ['fullName', 'infoText', 'role'],
 })
 </script>
 
-<style>
+<style scoped>
 section {
   margin: 2rem auto;
   max-width: 30rem;
