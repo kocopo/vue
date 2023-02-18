@@ -1,38 +1,39 @@
 <template>
   <section>
-    <h2>Available Badges</h2>
-    <ul>
-      <li>
-        <base-badge type="admin" caption="ADMIN"></base-badge>
-      </li>
-      <li>
-        <base-badge type="author" caption="AUTHOR"></base-badge>
-      </li>
-    </ul>
+    <base-card>
+      <template #header>
+        <h2>Available Badges</h2>
+      </template>
+      <template #default>
+        <ul>
+          <li>
+            <base-badge type="admin" caption="ADMIN"></base-badge>
+          </li>
+          <li>
+            <base-badge type="author" caption="AUTHOR"></base-badge>
+          </li>
+        </ul>
+      </template>
+    </base-card>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BaseBadge from './BaseBadge.vue';
+import BaseCard from './BaseCard.vue';
 
 export default defineComponent({
-    components: {BaseBadge}
+  components: { BaseBadge, BaseCard }
 })
 </script>
 
 <style scoped>
-section {
-  margin: 2rem auto;
-  max-width: 30rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
-}
 section h2 {
   margin: 0.5rem 0;
   color: #3a3a3a;
 }
+
 ul {
   list-style: none;
   margin: 0;
