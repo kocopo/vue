@@ -17,7 +17,7 @@ export default defineComponent({
     components: {ResourceItem},
     data() {
         return {
-            resources : inject('resources') as Resource[]
+            resources : inject<Resource[]>('resources')
         }
     }
 })
