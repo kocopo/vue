@@ -1,3 +1,3 @@
-type ButtonMode = 'flat';
+type ButtonMode = 'flat' | undefined;
 
 export default ButtonMode;

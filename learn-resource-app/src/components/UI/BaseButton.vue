@@ -1,19 +1,15 @@
 <template>
-    <button :type="type" :class="mode">
+    <button :class="mode">
         <slot></slot>
     </button>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { ButtonHTMLAttributes } from 'vue';
 import ButtonMode from '@/components/model/ButtonMode';
 
 export default defineComponent({
     props: {
-        type: {
-            type: String as PropType<ButtonHTMLAttributes['type']>
-        },
         mode: {
             type: String as PropType<ButtonMode>
         }

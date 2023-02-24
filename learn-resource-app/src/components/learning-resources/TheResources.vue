@@ -2,7 +2,6 @@
     <base-card>
         <base-button @click="setSelectedTab('stored-resources')" :mode="storedResButtonMode">Stored Resource</base-button>
         <base-button @click="setSelectedTab('add-resource')" :mode="addResButtonMode">Add Resource</base-button>
-
     </base-card>
     <component :is="selectedTab"></component>
 </template>
@@ -15,6 +14,7 @@ import ResourceTab from '../model/ResourceTab';
 import StoredResources from './StoredResources.vue';
 import AddResource from './AddResource.vue';
 import Resource from '../model/Resource';
+import ButtonMode from '../model/ButtonMode';
 
 export default defineComponent({
     components: { BaseCard, BaseButton, StoredResources, AddResource },
@@ -31,10 +31,10 @@ export default defineComponent({
         return {resources: this.storedResources};
     },
     computed:{
-        storedResButtonMode(){
+        storedResButtonMode(): ButtonMode{
             return this.selectedTab === 'stored-resources' ? undefined : 'flat';
         },
-        addResButtonMode(){
+        addResButtonMode(): ButtonMode{
             return this.selectedTab === 'add-resource' ? undefined : 'flat'
         }
     },
