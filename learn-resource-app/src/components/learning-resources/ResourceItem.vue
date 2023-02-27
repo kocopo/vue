@@ -3,7 +3,7 @@
     <base-card>
       <header>
         <h3>{{ title }}</h3>
-        <base-button mode="flat">Delete</base-button>
+        <base-button mode="flat" @click="removeResource(id)">Delete</base-button>
       </header>
       <p>{{ description }}</p>
       <nav>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
 import BaseCard from '../UI/BaseCard.vue';
 import BaseButton from '../UI/BaseButton.vue';
 
@@ -36,9 +36,9 @@ export default defineComponent({
   },
   data() {
     return {
-
+      removeResource: inject<any>('removeResource')
     }
-  },
+  }
 })
 </script>
 

@@ -1,4 +1,22 @@
 <template>
+        <base-dialog v-if="inputIsInvalid"
+    title="Invalid input"
+    @close="confirmError">
+        <template #default>
+            <p>
+                Unfortunately, at least one input is Invalid
+            </p>
+            <p>
+                Check inputs and make sure all of them have some information
+            </p>
+        </template>
+        <template #actions>
+            <base-button @click="confirmError">
+                OK
+            </base-button>
+        </template>
+    </base-dialog>
+
     <base-card>
         <form @submit.prevent="submitData">
             <div class="form-control">
@@ -21,28 +39,44 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject} from 'vue';
+import { defineComponent, inject } from 'vue';
 import BaseCard from '../UI/BaseCard.vue';
 import BaseButton from '../UI/BaseButton.vue';
 import Resource from '../model/Resource';
+import BaseDialog from '../UI/BaseDialog.vue';
 
 export default defineComponent({
     
-    components: { BaseCard, BaseButton },
-    inject: ['addResource'],
+    components: { BaseCard, BaseButton, BaseDialog },
     data() {
         return {
-            resource: {} as Resource,
+            resource: {
+                title: '',
+                description: '',
+                link: ''
+            } as Resource,
             // injecting function with typescript is hell, i jsut used any type and ignored warning
             //eslint-disable-next-line
-            addResource: inject<any>('addResource')
+            addResource: inject<any>('addResource'),
+            inputIsInvalid: false
         }
     },
     methods: {
         submitData() {
+            if(this.resource.title.trim() === '' || this.resource.description.trim() === '' || this.resource.link.trim() === ''){
+                this.inputIsInvalid = true;
+                return;
+            }
             this.resource.id = new Date().toISOString();
             this.addResource(this.resource);
-            this.resource = {} as Resource;
+            this.resource = {
+                title: '',
+                description: '',
+                link: ''
+            } as Resource;
+        },
+        confirmError(){
+            this.inputIsInvalid = false;
         }
     },
 })

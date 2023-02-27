@@ -30,8 +30,11 @@ export default defineComponent({
         }
     },
     provide() {
-        return {resources: this.storedResources,
-                addResource: this.addResource};
+        return {
+                resources: this.storedResources,
+                addResource: this.addResource,
+                removeResource: this.removeResource
+            };
     },
     computed:{
         storedResButtonMode(): ButtonMode{
@@ -48,6 +51,10 @@ export default defineComponent({
         addResource(resource: Resource){
             this.storedResources.unshift(resource); 
             this.selectedTab = 'stored-resources';
+        },
+        removeResource(resId: string){
+            const resIndex = this.storedResources.findIndex(res => res.id === resId);
+            this.storedResources.splice(resIndex, 1);
         }
     }
 })
