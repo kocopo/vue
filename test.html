@@ -1,0 +1,222 @@
+<!-- Update progress-bar whenever input field is updated.-->
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8" />
+</head>
+  
+<body>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">   </div>
+            <div class="col-sm-6">
+                <div class="container-fluid">
+                    <center>
+                        <h2 class="text-success">
+                          Enter Password:
+                      </h2>
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                  <i class="glyphicon glyphicon-user">
+                                  </i>
+                              </span>
+                                <input id="email" 
+                                       type="text" 
+                                       class="form-control" 
+                                       name="email" 
+                                       placeholder="User-Email">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                  <i class="glyphicon glyphicon-lock">
+                                  </i>
+                              </span>
+                                <input id="password" 
+                                       type="password" 
+                                       class="form-control" 
+                                       name="password" 
+                                       placeholder="Enter Password">
+                            </div>
+                        </div>
+                        <div id="reqText">
+                            <span id="eightChars">8 znaků</span>,
+                            <span id="bigChar">velké písmeno</span>,
+                            <span id="smallChar">malé písmeno</span>,
+                            <span id="number">číslo</span>,
+                            <span id="special">specíální znak</span>
+                        </div>
+                            <div id="success">Heslo má spravný tvar</div>
+                            <div class="input-group">
+                        
+                            <div class="progress" id="pone"></div>
+							<div class="progress" id="ptwo"></div>
+							<div class="progress" id="ptree"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="input-group">
+                            <button class="btn btn-success btn-block">
+                              Register Now!
+                          </button>
+                        </div>
+                    </center>
+                    <br>
+                </div>
+            </div>
+            <div class="col-sm-3">   </div>
+        </div>
+    </div>
+	    <link rel="stylesheet"
+          href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+  </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+  </script>
+  <style>
+    .container-fluid {
+        background-color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid lightgrey;
+        padding: 16px;
+        -webkit-box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.75);
+    }
+      
+    .input-group {
+        width: 80%;
+        height: auto;
+        padding: 4px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+    }
+      
+    .progress {
+        height: 4px;
+		width:32%;
+    }
+      
+    .progress-bar {
+        background-color: green;
+    }
+
+    #reqText{
+        width: 80%;
+        text-align: left;
+    }
+
+    #reqText span{
+        color:red;
+    }
+
+    #success{
+        color: green;
+        text-align: left;
+        width: 80%;
+    }
+</style>
+    <script>
+        
+        $("#success").hide();
+        function check(n, m) {
+            var passwordStrength = 0;
+
+            if(n >= 8){
+                passwordStrength += 1;
+                $("#eightChars").css("color", "green");
+            }else{
+                $("#eightChars").css("color", "red");
+            }
+            
+            //Lowercase Words only
+            if ((m.match(/[a-z]/) != null)) 
+            {
+                passwordStrength += 1;
+                $("#smallChar").css("color", "green");
+            }else{
+                $("#smallChar").css("color", "red");
+            }
+            
+            //Uppercase Words only
+            if ((m.match(/[A-Z]/) != null)) 
+            {
+                passwordStrength += 1;
+                $("#bigChar").css("color", "green");
+            }else{
+                $("#bigChar").css("color", "red");
+            }
+            
+            //Digits only
+            if ((m.match(/0|1|2|3|4|5|6|7|8|9/) != null)) 
+            {
+                passwordStrength += 1;
+                $("#number").css("color", "green");
+            }else{
+                $("#number").css("color", "red");
+            }
+            
+            //Special characters
+            if ((m.match(/\W/) != null) && (m.match(/\D/) != null))
+            {
+                passwordStrength += 1;
+                $("#special").css("color", "green");
+            }else{
+                $("#special").css("color", "red");
+            }
+  
+            
+
+            if(passwordStrength === 0){
+                $("#pone").css("background", "#f5f5f5");
+                $("#ptwo").css("background", "#f5f5f5");
+                $("#ptree").css("background", "#f5f5f5");
+                $("#reqText").show();
+                $("#success").hide();
+            }
+            if(passwordStrength >= 1 && passwordStrength <= 2){
+                $("#pone").css("background", "red");
+                $("#ptwo").css("background", "#f5f5f5");
+                $("#ptree").css("background", "#f5f5f5");
+                $("#reqText").show();
+                $("#success").hide();
+            }else if(passwordStrength >= 3 && passwordStrength <= 4){
+                $("#pone").css("background", "orange");
+                $("#ptwo").css("background", "orange");
+                $("#ptree").css("background", "#f5f5f5");
+                $("#reqText").show();
+                $("#success").hide();
+            }else if(passwordStrength >= 5){
+                $("#pone").css("background", "green");
+                $("#ptwo").css("background", "green");
+                $("#ptree").css("background", "green");
+                $("#reqText").hide();
+                $("#success").show();
+            }
+        }
+  
+        // Update progress bar as per the input
+        $(document).ready(function() {
+            // Whenever the key is pressed, apply condition checks. 
+            $("#password").keyup(function() {
+                var m = $(this).val();
+                var n = m.length;
+  
+                // Function for checking
+                check(n, m);
+            });
+        });
+    </script>
+</body>
+  
+</html>
