@@ -1,7 +1,7 @@
 interface SurveyData {
-    id: String,
-    userName: String,
-    rating: String
+    id?: string,
+    userName: string,
+    rating: string
 }
 
 export default SurveyData;

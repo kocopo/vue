@@ -1,13 +1,12 @@
 <template>
-  <learning-survey @survey-submit="storeSurvey"></learning-survey>
-  <user-experiences :results="savedSurveyResults"></user-experiences>
+  <learning-survey ></learning-survey>
+  <user-experiences ></user-experiences>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import LearningSurvey from './components/survey/LearningSurvey.vue';
 import UserExperiences from './components/survey/UserExperiences.vue';
-import SurveyData from './components/model/SurveyData';
 
 
 export default defineComponent({
@@ -15,7 +14,7 @@ export default defineComponent({
     LearningSurvey,
     UserExperiences,
   },
-  data() {
+/*   data() {
     return {
       savedSurveyResults: [] as SurveyData[],
     };
@@ -25,7 +24,7 @@ export default defineComponent({
       this.savedSurveyResults.push(surveyData);
       console.log(surveyData);
     },
-  },
+  }, */
 });
 </script>
 

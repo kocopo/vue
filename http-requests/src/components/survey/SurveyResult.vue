@@ -11,7 +11,14 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    props: ['name', 'rating'],
+    props: {
+      rating:{
+        type: String
+      },
+      name: {
+        type:String
+      }
+    },
   computed: {
     ratingClass() {
       return 'highlight rating--' + this.rating;

@@ -32,6 +32,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SurveyData from '../model/SurveyData';
+import axios from 'axios'
 
 export default defineComponent({
     data() {
@@ -49,13 +50,17 @@ export default defineComponent({
                 return;
             }
             this.invalidInput = false;
-
-            this.$emit('survey-submit', {
+            const obj = {
                 userName: this.enteredName,
                 rating: this.chosenRating,
-                id: new Date().toISOString(),
-            } as SurveyData);
+            } as SurveyData;
+            /* this.$emit('survey-submit', obj); */
 
+            axios.post('https://vue-http-demo-d2ddd-default-rtdb.europe-west1.firebasedatabase.app/surveys.json', obj)
+            .then(response => {
+                console.log(response)
+            });
+            
             this.enteredName = '';
             this.chosenRating = null;
         },
