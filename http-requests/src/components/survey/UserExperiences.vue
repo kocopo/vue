@@ -5,7 +5,9 @@
       <div>
         <base-button @click="loadExperiences">Load Submitted Experiences</base-button>
       </div>
-      <ul>
+      <p v-if="isLoading">Loading...</p>
+      <p v-if="!isLoading && (!results || results.length === 0)">No stored expiriences found, try to add some</p>
+      <ul v-else-if="!isLoading && results && results.length > 0">
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -28,13 +30,16 @@ export default defineComponent({
     components: { SurveyResult },
     data() {
       return {
-        results: [] as SurveyData[] 
+        results: [] as SurveyData[],
+        isLoading: false
       }
     },
     methods: {
       loadExperiences(){
-        axios.get('https://vue-http-demo-d2ddd-default-rtdb.europe-west1.firebasedatabase.app/surveys.json')
+        this.isLoading = true;
+        axios.get('https://vue-http-demo-d2ddd-default-rtdb.europe-west1.firebasedatabase.app/surveys')
             .then(response => {
+              this.isLoading = false;
                 if(response.status === axios.HttpStatusCode.Ok){
                   const results: SurveyData[] = [];
                   for(const id in response.data){
@@ -42,8 +47,13 @@ export default defineComponent({
                   }
                   this.results = results;
                 }
+            }).catch(error => {
+              console.log(error)
             });
       }
+    },
+    mounted() {
+      this.loadExperiences();
     },
 })
 </script>
