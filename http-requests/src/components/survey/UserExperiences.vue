@@ -6,8 +6,9 @@
         <base-button @click="loadExperiences">Load Submitted Experiences</base-button>
       </div>
       <p v-if="isLoading">Loading...</p>
-      <p v-if="!isLoading && (!results || results.length === 0)">No stored expiriences found, try to add some</p>
-      <ul v-else-if="!isLoading && results && results.length > 0">
+      <p v-else-if="!isLoading && error">{{ error }}</p>
+      <p v-else-if="!isLoading && (!results || results.length === 0)">No stored expiriences found, try to add some</p>
+      <ul v-else>
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -31,15 +32,17 @@ export default defineComponent({
     data() {
       return {
         results: [] as SurveyData[],
-        isLoading: false
+        isLoading: false,
+        error: null as string | null
       }
     },
     methods: {
       loadExperiences(){
         this.isLoading = true;
-        axios.get('https://vue-http-demo-d2ddd-default-rtdb.europe-west1.firebasedatabase.app/surveys')
+        axios.get('https://vue-http-demo-d2ddd-default-rtdb.europe-west1.firebasedatabase.app/surveys.json')
             .then(response => {
               this.isLoading = false;
+              this.error = null;
                 if(response.status === axios.HttpStatusCode.Ok){
                   const results: SurveyData[] = [];
                   for(const id in response.data){
@@ -47,8 +50,9 @@ export default defineComponent({
                   }
                   this.results = results;
                 }
-            }).catch(error => {
-              console.log(error)
+            }).catch(() => {
+              this.isLoading = false;
+              this.error = 'Failed to fetch data, please try again later.'
             });
       }
     },

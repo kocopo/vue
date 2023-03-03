@@ -21,6 +21,7 @@
                     <label for="rating-great">Great</label>
                 </div>
                 <p v-if="invalidInput">One or more input fields are invalid. Please check your provided data.</p>
+                <p v-if="error">{{ error }}</p>
                 <div>
                     <base-button>Submit</base-button>
                 </div>
@@ -40,6 +41,7 @@ export default defineComponent({
             enteredName: '',
             chosenRating: null as string | null,
             invalidInput: false,
+            error: null as string | null
         };
     },
     emits: ['survey-submit'],
@@ -56,13 +58,17 @@ export default defineComponent({
             } as SurveyData;
             /* this.$emit('survey-submit', obj); */
 
-            axios.post('https://vue-http-demo-d2ddd-default-rtdb.europe-west1.firebasedatabase.app/surveys.json', obj)
-            .then(response => {
-                console.log(response)
-            });
-            
-            this.enteredName = '';
-            this.chosenRating = null;
+            axios.post('https://vue-http-demo-d2ddd-default-rtdb.europe-west1.firebasedatabase.app/surveys.json',
+                obj)
+                .then(() => {
+                        this.error = null
+                        this.enteredName = '';
+                        this.chosenRating = null;
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.error = "Couldn't save the data !"
+                });
         },
     },
 })
