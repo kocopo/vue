@@ -2,13 +2,9 @@
   <section>
     <h2>{{ teamName }}</h2>
     <ul>
-      <user-item
-        v-for="member in members"
-        :key="member.id"
-        :name="member.fullName"
-        :role="member.role"
-      ></user-item>
+      <user-item v-for="member in members" :key="member.id" :name="member.fullName" :role="member.role"></user-item>
     </ul>
+    <router-link to="/teams/t2">Go to team 2</router-link>
   </section>
 </template>
 
@@ -19,8 +15,14 @@ import Member from '../model/Member';
 import Team from '../model/Team';
 
 export default defineComponent({
-    components: {
+  components: {
     UserItem
+  },
+  props:{
+    teamId:{
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
@@ -30,19 +32,33 @@ export default defineComponent({
       users: inject<Member[]>('users'),
     };
   },
-  created() {
-    const teamId = this.$route.params.teamId;
-    const selectedTeam = this.teams?.find(team => team.id === teamId);
-    const members = selectedTeam?.members;
-    const selectedMembers:Member[] = [];
-    if(this.users){
-      for(const member in members){
-      const mem = this.users.find(user => user.id === member);
-      if(mem){
-        selectedMembers.push(mem)
-      }
+  methods:{
+    createContent(teamId: string){
+    if (this.teams) {
+      const selectedTeam = this.teams.find(team => team.id === teamId);
+      if (selectedTeam) {
+        const members = selectedTeam.members;
+        const selectedMembers: Member[] = [];
+        if (this.users) {
+          for (const member of members) {
+            const mem = this.users.find(user => user.id === member);
+            if (mem) {
+              selectedMembers.push(mem)
+            }
+          }
+          this.members = selectedMembers;
+        }
+      } 
     }
-    this.members = selectedMembers;
+    }
+  },
+  created() {
+    this.createContent(this.teamId);
+    console.log(this.$route.query)
+  },
+  watch:{
+    teamId(newTeamId: string){
+      this.createContent(newTeamId);
     }
   }
 })

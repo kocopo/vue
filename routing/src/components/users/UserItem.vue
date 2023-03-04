@@ -33,6 +33,7 @@ export default defineComponent({
 
 <style scoped>
 li {
+  list-style: none;
   margin: 1rem 0;
   border: 1px solid #ccc;
   padding: 1rem;
