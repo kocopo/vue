@@ -3,10 +3,10 @@
         <nav>
             <ul>
                 <li>
-                    <button @click="setActivePage('teams-list')">Teams</button>
+                    <router-link to="/teams">Teams</router-link>
                 </li>
                 <li>
-                    <button @click="setActivePage('users-list')">Users</button>
+                    <router-link to="/users">Users</router-link>
                 </li>
             </ul>
         </nav>
@@ -17,12 +17,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    emits: ['set-page'],
-  methods: {
-    setActivePage(page: string) {
-      this.$emit('set-page', page);
-    },
-  },
+
 })
 </script>
 
@@ -51,8 +46,8 @@ li {
     margin: 0 2rem;
 }
 
-button {
-    font: inherit;
+a {
+    text-decoration: none;
     background: transparent;
     border: 1px solid transparent;
     cursor: pointer;
@@ -61,8 +56,9 @@ button {
     display: inline-block;
 }
 
-button:hover,
-button:active {
+a:hover,
+a:active,
+a.router-link-active {
     color: #f1a80a;
     border-color: #f1a80a;
     background-color: #1a037e;

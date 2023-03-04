@@ -13,9 +13,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
 import UserItem from '../users/UserItem.vue';
 import Member from '../model/Member';
+import Team from '../model/Team';
 
 export default defineComponent({
     components: {
@@ -23,13 +24,27 @@ export default defineComponent({
   },
   data() {
     return {
-      teamName: 'Test',
-      members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-        { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-      ] as Member[],
+      teamName: '',
+      members: [] as Member[],
+      teams: inject<Team[]>('teams'),
+      users: inject<Member[]>('users'),
     };
   },
+  created() {
+    const teamId = this.$route.params.teamId;
+    const selectedTeam = this.teams?.find(team => team.id === teamId);
+    const members = selectedTeam?.members;
+    const selectedMembers:Member[] = [];
+    if(this.users){
+      for(const member in members){
+      const mem = this.users.find(user => user.id === member);
+      if(mem){
+        selectedMembers.push(mem)
+      }
+    }
+    this.members = selectedMembers;
+    }
+  }
 })
 </script>
 
