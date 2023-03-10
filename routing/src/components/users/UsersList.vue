@@ -25,6 +25,10 @@ export default defineComponent({
       this.$router.push('/teams');
     }
   },
+  beforeRouteEnter(to, from, next){
+    console.log(to,from);
+    next();
+  }
 })
 </script>
 

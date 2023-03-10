@@ -18,8 +18,8 @@ export default defineComponent({
   components: {
     UserItem
   },
-  props:{
-    teamId:{
+  props: {
+    teamId: {
       type: String,
       required: true
     }
@@ -32,14 +32,13 @@ export default defineComponent({
       users: inject<Member[]>('users'),
     };
   },
-  methods:{
-    createContent(teamId: string){
-    if (this.teams) {
-      const selectedTeam = this.teams.find(team => team.id === teamId);
-      if (selectedTeam) {
-        const members = selectedTeam.members;
-        const selectedMembers: Member[] = [];
-        if (this.users) {
+  methods: {
+    createContent(teamId: string) {
+      if (this.teams && this.users) {
+        const selectedTeam = this.teams.find(team => team.id === teamId);
+        if (selectedTeam) {
+          const members = selectedTeam.members;
+          const selectedMembers: Member[] = [];
           for (const member of members) {
             const mem = this.users.find(user => user.id === member);
             if (mem) {
@@ -47,17 +46,20 @@ export default defineComponent({
             }
           }
           this.members = selectedMembers;
+
         }
-      } 
-    }
+      }
     }
   },
   created() {
     this.createContent(this.teamId);
     console.log(this.$route.query)
   },
-  watch:{
-    teamId(newTeamId: string){
+  beforeRouteUpdate(to,from, next){
+    next();
+  },
+  watch: {
+    teamId(newTeamId: string) {
       this.createContent(newTeamId);
     }
   }
