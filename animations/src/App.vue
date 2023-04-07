@@ -4,10 +4,24 @@
     <button @click="animateBlock()">Animate</button>
   </div>
   <div class="container">
-    <transition name="para">
-      <p v-if="paraIsVisible">THis is only somethimes visible</p>
+    <transition :css="false" 
+    @before-enter="beforeEnter" 
+    @enter="enter"
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
+    @enter-cancelled="enterCancelled"
+    @leave-cancelled="leaveCancelled">
+      <p v-if="paraIsVisible">This is only somethimes visible</p>
     </transition>
     <button @click="toggleParagraph()">Toggle paragraph</button>
+  </div>
+  <div class="container">
+    <transition name="fade-button" mode="out-in">
+      <button @click="showUsers()" v-if="!usersVisible">Show Users</button>
+      <button @click="hideUsers()" v-else>Hide Users</button>
+    </transition>
   </div>
 
   <base-modal @close="hideDialog" :open="dialogIsVisible">
@@ -27,10 +41,56 @@ export default defineComponent({
     return {
       dialogIsVisible: false,
       animatedBlock: false,
-      paraIsVisible: false
+      paraIsVisible: false,
+      usersVisible: false,
+      enterInterval: 0,
+      leaveInterval: 0
     };
   },
   methods: {
+    beforeEnter(el : HTMLElement){
+      console.log('Before Enter');
+      el.style.opacity = '0';
+    },
+    enter(el : HTMLElement, done: () => void){
+      console.log('Enter');
+      let round = 1;
+      this.enterInterval = setInterval(() => {
+        if(round > 100){
+          done();
+          clearInterval(this.enterInterval);
+        }
+        el.style.opacity = (round * 0.01).toString();
+        round++;
+      }, 20);
+    },
+    afterEnter(){
+      console.log('After Eenter')
+    },
+    beforeLeave(){
+      console.log('Before Leave');
+    },
+    leave(el:HTMLElement, done:() => void){
+      let round = 100;
+      this.leaveInterval = setInterval( () => {
+        if(round === 0){
+          done();
+          clearInterval(this.leaveInterval);
+        }
+        el.style.opacity = (round * 0.01).toString();
+        round--;
+      }, 20);
+      console.log('Leave')
+    },
+    afterLeave(){
+      console.log('After leave')
+    },
+    enterCancelled(){
+      clearInterval(this.enterInterval);
+    },
+    leaveCancelled(){
+      clearInterval(this.leaveInterval);
+    },
     showDialog() {
       this.dialogIsVisible = true;
     },
@@ -42,40 +102,18 @@ export default defineComponent({
     },
     toggleParagraph() {
       this.paraIsVisible = !this.paraIsVisible;
+    },
+    showUsers(){
+      this.usersVisible = true;
+    },
+    hideUsers(){
+      this.usersVisible = false;
     }
   },
 });
 </script>
 
 <style>
-
-.para-enter-from {
-  /* opacity: 0;
-transform: translateY(-30px); */
-}
-
-.para-enter-active {
-  animation: slide-scale 0.3s ease-out;
-}
-
-.para-enter-to {
-  /*   opacity: 1;
-  transform: translateY(0); */
-}
-
-.para-leave-from {
-  /*   opacity: 1;
-  transform: translateY(0); */
-}
-
-.para-leave-active {
-  animation: slide-scale 0.3s ease-in;
-}
-
-.para-leave-to {
-  /*   opacity: 0;
-  transform: translateY(30px); */
-}
 
 .animate {
   /* transform: translateX(150px); */
@@ -129,6 +167,25 @@ button:active {
   border-radius: 12px;
 }
 
+.fade-button-enter-from,
+.fade-button-leave-to{
+  opacity: 0;
+}
+
+
+.fade-button-enter-active{
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-button-leave-active{
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-button-leave-from,
+.fade-button-enter-to{
+  opacity: 1;
+}
+
 @keyframes slide-scale {
   0% {
     transform: translateX(0) scale(1);
@@ -142,5 +199,4 @@ button:active {
     transform: translateX(-150px) scale(1);
   }
 }
-
 </style>
