@@ -1,5 +1,8 @@
 <template>
-  <base-container title="Toto"><h1>Hello</h1></base-container>
+  <base-container title="Toto">
+    <h3>{{ $store.state.counter }}</h3>
+    <button>Add 1</button>
+  </base-container>
 </template>
 
 <script lang="ts">
