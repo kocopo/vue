@@ -2,9 +2,11 @@
   <base-container title="Toto">
     <h3>{{ counter }}</h3>
     <the-counter></the-counter>
+    <favourite-value></favourite-value>
     <button @click="addOne">Add 10</button>
     <change-counter></change-counter>
   </base-container>
+  
 </template>
 
 <script lang="ts">
@@ -12,12 +14,16 @@ import { defineComponent } from 'vue';
 import BaseContainer from './components/BaseContainer.vue';
 import TheCounter from './components/TheCounter.vue';
 import ChangeCounter from './components/ChangeCounter.vue';
+import FavouriteValue from './components/FavouriteValue.vue';
+import UserAuth from './components/UserAuth.vue';
 
 export default defineComponent({
   components: {
     BaseContainer,
     TheCounter,
-    ChangeCounter
+    ChangeCounter,
+    FavouriteValue,
+    UserAuth
   },
   computed:{
     counter(){
@@ -27,7 +33,11 @@ export default defineComponent({
   methods:{
     addOne(){
       //this.$store.commit('increase', {value:10});
-      this.$store.commit({
+      //this.$store.commit({
+      //  type: 'increase',
+      //  value: 10
+      //});
+      this.$store.dispatch({
         type: 'increase',
         value: 10
       });
