@@ -1,16 +1,20 @@
 <template>
-  <base-container title="Toto">
+  <base-container title="Toto" v-if="loginStatus">
     <h3>{{ counter }}</h3>
     <the-counter></the-counter>
     <favourite-value></favourite-value>
     <button @click="addOne">Add 10</button>
     <change-counter></change-counter>
   </base-container>
+  <base-container>
+    <user-auth></user-auth>
+  </base-container>
   
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import {mapGetters} from 'vuex';
 import BaseContainer from './components/BaseContainer.vue';
 import TheCounter from './components/TheCounter.vue';
 import ChangeCounter from './components/ChangeCounter.vue';
@@ -28,7 +32,8 @@ export default defineComponent({
   computed:{
     counter(){
       return this.$store.state.counter;
-    }
+    },
+    ...mapGetters(['loginStatus'])
   },
   methods:{
     addOne(){
@@ -38,7 +43,7 @@ export default defineComponent({
       //  value: 10
       //});
       this.$store.dispatch({
-        type: 'increase',
+        type: 'numbers/increase',
         value: 10
       });
     }

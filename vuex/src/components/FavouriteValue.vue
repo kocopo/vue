@@ -11,7 +11,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     computed:{
         counter(){
-            return this.$store.getters.normalizedCounter;
+            return this.$store.getters['numbers/normalizedCounter'];
         }
     }
 })

@@ -13,7 +13,7 @@ export default defineComponent({
 /*         counter(){
             return this.$store.getters.finalCounter;
         } */
-        ...mapGetters(['finalCounter'])
+        ...mapGetters('numbers',['finalCounter'])
     }
 })
 </script>
