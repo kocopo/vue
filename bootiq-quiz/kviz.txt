@@ -1,0 +1,55 @@
+První kategorie
+Tohle je otázka ?
+100
+Kolik kafí vypil Bob za rok 2022 ?
+2000
+Tohle je otázka ?
+300
+Tohle je otázka ?
+400
+Tohle je otázka ?
+500
+Druhá kategorie
+Tohle je otázka ?
+100
+Tohle je otázka ?
+200
+Tohle je otázka ?
+300
+Tohle je otázka ?
+400
+Tohle je otázka ?
+500
+Třetí kategorie
+Tohle je otázka ?
+500
+Tohle je otázka ?
+400
+Tohle je otázka ?
+600
+Tohle je otázka ?
+700
+Tohle je otázka ?
+800
+Čtvrtá kategorie
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
+Pátá kategorie
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
+Tohle je otázka ?
+100
