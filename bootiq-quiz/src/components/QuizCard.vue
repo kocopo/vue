@@ -3,12 +3,25 @@
         {{ value }}
     </div>
     <base-modal :open="openDialog" @close="hideDialog" @hide-question="hideQuestion">
-    {{ questionText }}
+    <div v-if="!answers || answers.length === 0">
+        {{ questionText }}
+    </div>
+    <div v-else class="question-answers">
+        <div class="question">{{ questionText }}</div>
+        <div class="divider"></div>
+        <div class="answers">
+            <ol>
+                <li v-for="answer in answers" :key="answer">
+                    {{ answer }}
+                </li>
+            </ol>
+        </div>
+    </div>
     </base-modal>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import BaseModal from './BaseModal.vue';
 
 export default defineComponent({
@@ -23,6 +36,9 @@ export default defineComponent({
         questionText:{
             type: String,
             required: true
+        },
+        answers:{
+            type: Array as PropType<string[]>
         }
     },
     data() {
@@ -50,7 +66,6 @@ export default defineComponent({
 
 <style scoped>
 .base{
-    font-family: 'Noto Sans', sans-serif;
     border: 1px solid white;
     border-radius: 10px;
     background-color: black;
@@ -71,5 +86,36 @@ export default defineComponent({
 .base:hover{
     background-color: yellow;
     color: black;
+}
+
+.question-answers{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.divider{
+    width: 5px;
+    height: 100%;
+    background-color: yellow;
+    border-radius: 5px;
+}
+
+ol{
+    list-style-type: upper-latin;
+}
+
+.question{
+    width: 65%;
+    padding: 15px;
+}
+
+.answers{
+    width: 35%;
+    padding: 0 10px 0 80px;
+    text-align: left;
+    font-size: 2.5rem;
+    line-height: 60px;
 }
 </style>

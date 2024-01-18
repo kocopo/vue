@@ -44,10 +44,10 @@ export default defineComponent({
 
 dialog {
   position: fixed;
-  top: 25vh;
-  left: calc(50% - 35vw);
-  width: 70vw;
-  height: 35vh;
+  top: 10vh;
+  left: calc(50% - 45vw);
+  width: 90vw;
+  height: 75vh;
   margin: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;

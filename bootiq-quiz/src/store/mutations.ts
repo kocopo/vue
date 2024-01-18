@@ -13,16 +13,19 @@ export default{
                 name: payload[i],
                 questions: []
             }
-            for(let j = i + 1; j < i + 10; j+=2){
+            for(let j = i + 1; j < i + 15; j+=3){
+                let splitAnswers = payload[j+1].split(';');
+                splitAnswers = splitAnswers.filter(a => a !== '');
                 const question : Question = {
                     id: j,
                     questionText: payload[j],
-                    value: parseInt(payload[j+1])
+                    answers: splitAnswers,
+                    value: parseInt(payload[j+2])
                 }
                 category.questions.push(question);
             }
             categories.push(category);
-            i = i + 11;
+            i = i + 16;
             cycles++;
         }
         state.categories = categories;

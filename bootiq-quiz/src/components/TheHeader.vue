@@ -24,7 +24,7 @@ export default defineComponent({
             const parseArrayFunc = this.parseArray;
             // eslint-disable-next-line
             reader.onload = function(_){
-                let fileLines = this.result?.toString().split('\r\n') as string[];
+                let fileLines = this.result?.toString().split('\r\n');
                 parseArrayFunc(fileLines);
             }
             reader.readAsText(file);

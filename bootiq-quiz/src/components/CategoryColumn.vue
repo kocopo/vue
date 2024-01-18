@@ -5,7 +5,8 @@
         </span>
         <quiz-card v-for="question in category.questions" :key="question.id" 
         :value="question.value" 
-        :question-text="question.questionText"/>
+        :question-text="question.questionText"
+        :answers="question.answers"/>
     </div>
 </template>
 
@@ -38,7 +39,14 @@ export default defineComponent({
 }
 .category-header{
     height: 10%;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     padding: 10px 0 10px 0;
+    background-color: yellow;
+    color: black;
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

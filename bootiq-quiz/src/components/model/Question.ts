@@ -1,6 +1,7 @@
 interface Question{
     id: number,
     questionText: string,
+    answers: string[],
     value: number
 };
 

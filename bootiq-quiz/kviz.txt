@@ -1,55 +1,80 @@
-První kategorie
+Alkohol
 Tohle je otázka ?
+Pejsek;Kočička;;
+10
+Jakej je Otík ?
+Nejlepší;Nejhorší;Nejkočkovantější;Nejpejskovatější
+20
+Tohle je otázka ?
+;;;
+30
+Tohle je otázka ?
+;;;
+50
+Tohle je otázka ?
+;;;
 100
-Kolik kafí vypil Bob za rok 2022 ?
-2000
+Filmy
 Tohle je otázka ?
-300
+;;;
+10
 Tohle je otázka ?
-400
+;;;
+20
 Tohle je otázka ?
-500
-Druhá kategorie
+;;;
+30
 Tohle je otázka ?
+;;;
+50
+Tohle je otázka ?
+;;;
 100
+Old School
 Tohle je otázka ?
-200
+;;;
+10
 Tohle je otázka ?
-300
+;;;
+20
 Tohle je otázka ?
-400
+;;;
+30
 Tohle je otázka ?
-500
-Třetí kategorie
+;;;
+50
 Tohle je otázka ?
-500
-Tohle je otázka ?
-400
-Tohle je otázka ?
-600
-Tohle je otázka ?
-700
-Tohle je otázka ?
-800
-Čtvrtá kategorie
-Tohle je otázka ?
+;;;
 100
+IT
 Tohle je otázka ?
-100
+;;;
+10
 Tohle je otázka ?
-100
+;;;
+20
 Tohle je otázka ?
-100
+;;;
+30
 Tohle je otázka ?
+;;;
+50
+Tohle je otázka ?
+;;;
 100
 Pátá kategorie
 Tohle je otázka ?
-100
+;;;
+10
 Tohle je otázka ?
-100
+;;;
+20
 Tohle je otázka ?
-100
+;;;
+30
 Tohle je otázka ?
-100
+;;;
+50
 Tohle je otázka ?
+;;;
 100
